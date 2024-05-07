@@ -35,7 +35,7 @@ def get_cfg(output_dir, learning_rate, batch_size, iterations, checkpoint_period
 
     # Set the training and validation datasets and exclude the test dataset.
     cfg.DATASETS.TRAIN = ("train",)
-    cfg.DATASETS.VAL = ("val",)
+    cfg.DATASETS.VAL = ("valid",)
     cfg.DATASETS.TEST = ()
 
     # Set the device to use for training.
@@ -151,7 +151,7 @@ def register_datasets(root_dir, class_list_file):
         classes_ = [l[:-1] for l in reader.readlines()]
 
     # Register the train and validation datasets.
-    for d in ['train', 'val']:
+    for d in ['train', 'valid']:
         DatasetCatalog.register(d, lambda d=d: get_dicts(os.path.join(root_dir, d, 'images'),
                                                          os.path.join(root_dir, d, 'labels')))
         # Set the metadata for the dataset.
